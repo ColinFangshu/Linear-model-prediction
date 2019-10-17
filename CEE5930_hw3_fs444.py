@@ -133,7 +133,7 @@ print("the VIF of the two transfomred variables (the customer and the customer s
 
 # calculate a 95% confidence interval for the predicted line maintenance costs for a utility serving 100,000 customers
 MSres = results5.mse_resid
-X0 = [100000-np.mean(df_maint_cost["Customers (000's)"]), np.square(100000)-np.mean(df_maint_cost["Customers Squared"])]
+X0 = [100-np.mean(df_maint_cost["Customers (000's)"]), np.square(100-np.mean(df_maint_cost["Customers (000's)"]))]
 X = X_transformed[["Customers (000's) transformed", "Customers Squared transformed"]]
 slope1 = 14.4162
 slope2 = 0.1543 
@@ -141,9 +141,9 @@ intercept = 955.6563
 n = 12
 k = 1
 t_value = 2.228
-y_hat_x_equal_100000 = X0[0]*slope1 + X0[1]*slope2 + intercept
+y_hat_x_equal_100 = X0[0]*slope1 + X0[1]*slope2 + intercept
 
-interval_with_95_confidence_when_x_equals_100000 = [y_hat_x_equal_100000 - t_value*np.sqrt(MSres*(1+int(np.dot(np.dot(np.transpose(X0),(np.matrix((np.dot(np.array(np.transpose(X)),np.array(X)))).I)),X0)))), 
-                                                    y_hat_x_equal_100000 + t_value*np.sqrt(MSres*(1+int(np.dot(np.dot(np.transpose(X0),(np.matrix((np.dot(np.array(np.transpose(X)),np.array(X)))).I)),X0))))]
+interval_with_95_confidence_when_x_equals_100 = [y_hat_x_equal_100 - t_value*np.sqrt(MSres*(1+int(np.dot(np.dot(np.transpose(X0),(np.matrix((np.dot(np.array(np.transpose(X)),np.array(X)))).I)),X0)))), 
+                                                y_hat_x_equal_100 + t_value*np.sqrt(MSres*(1+int(np.dot(np.dot(np.transpose(X0),(np.matrix((np.dot(np.array(np.transpose(X)),np.array(X)))).I)),X0))))]
 
-print("The 95% confidence interval for a prediction of maintenance costs for a utility serving 100,000 customers is: {}".format(interval_with_95_confidence_when_x_equals_100000))
+print("The 95% confidence interval for a prediction of maintenance costs for a utility serving 100,000 customers is: {}".format(interval_with_95_confidence_when_x_equals_100))
